@@ -1,0 +1,65 @@
+---
+title       : MTCars Analysis 6
+subtitle    : Cluster and Regression Analysis MT Cars Dataset
+author      : Bernd Schnabl
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [interactive shiny]            # {mathjax, quiz, bootstrap}
+ext_widgets : {rCharts: [libraries/nvd3]}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## The Dataset
+
+The dataset MTCARS is from the prestigious car magazoine Motor Trends.
+This dataset contains information from various models including type
+of transmission, weight, fuel consumption among others. 
+
+![Cover](Cover70-September.jpg)
+
+
+--- ds:soothe .class #id  
+
+## Features of the Application
+
+This application allows the analysis of all features in the dataset. 
+
+* Read the instruction how to use the application
+* Select X and Y axis from any feature of the dataset
+* Select number of cluster to split datset
+* Perform Regression analysis
+* Perform Cluster Analysis
+
+
+--- ds:soothe .class #id  
+
+## Consumption vs cyl 
+
+``` {r echo =TRUE}
+library(ggplot2)
+p <- ggplot( mtcars, aes(wt, mpg))
+p  + geom_point(aes(colour=factor(cyl), size = qsec))
+``` 
+
+--- .class #id 
+
+## Clusters
+
+
+
+```{r echo = F, results = 'asis'}
+mt<-mtcars[,c("wt","mpg")]
+mt.km <- kmeans(mt, 3)
+plot(mt,col = mt.km$cluster, pch=20, cex=3)
+symbols(mt.km$centers, circles = mt.km$withinss,add = T )
+```
+
+
+
+
+
+
+
